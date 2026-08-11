@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuestLogs | Portfolio Case Study & Platform Documentation</title>
+    <style>
+        :root {
+            --bg-dark: #07070a;
+            --bg-card: #0f1017;
+            --bg-card-alt: #161824;
+            --accent-purple: #8a2be2;
+            --accent-glow: #a855f7;
+            --neon-cyan: #38bdf8;
+            --neon-pink: #ec4899;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #26293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 4rem;
+        }
+
+        /* HEADER & NAVBAR */
+        header {
+            background: rgba(15, 16, 23, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--accent-purple);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--accent-glow);
+            font-size: 0.75rem;
+            background: rgba(168, 85, 247, 0.15);
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--accent-glow);
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--neon-cyan);
+        }
+
+        .cart-badge-btn {
+            background: var(--accent-purple);
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .cart-badge-btn:hover {
+            background: var(--accent-glow);
+            transform: scale(1.05);
+        }
+
+        /* HERO SECTION */
+        .case-hero {
+            max-width: 1200px;
+            margin: 3rem auto 2rem auto;
+            padding: 0 1.5rem;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(56, 189, 248, 0.2));
+            border: 1px solid var(--accent-glow);
+            color: var(--neon-cyan);
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .case-hero h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #ffffff, var(--accent-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .case-hero p.subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 820px;
+            margin: 0 auto 2rem auto;
+        }
+
+        /* METRICS & METADATA GRID */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+            margin-top: 2rem;
+        }
+
+        .meta-item h4 {
+            color: var(--accent-glow);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+        }
+
+        .meta-item p {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* MAIN CONTAINER & SECTION BLOCKS */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-block {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #fff;
+            border-left: 4px solid var(--accent-purple);
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* STORYBOARD & UI GALLERY WITH REAL IMAGES */
+        .storyboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .story-card {
+            background: var(--bg-card-alt);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(138, 43, 226, 0.25);
+        }
+
+        .browser-bar {
+            background: #090a0f;
+            padding: 0.6rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot-red { background: #ff5f56; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #27c93f; }
+
+        .browser-url {
+            margin-left: auto;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: #151722;
+            padding: 2px 10px;
+            border-radius: 10px;
+        }
+
+        .story-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .story-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .story-body h3 {
+            color: var(--neon-cyan);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .story-body p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        /* HARDWARE STORE PREVIEW SECTION */
+        .shop-sim {
+            background: #0a0b10;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--bg-card-alt);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--accent-purple);
+            color: #fff;
+            border-color: var(--accent-purple);
+        }
+
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 0.8rem;
+        }
+
+        .product-card h4 {
+            font-size: 0.95rem;
+            color: #fff;
+            margin-bottom: 0.3rem;
+        }
+
+        .product-card .price {
+            color: var(--accent-glow);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-action-sm {
+            flex: 1;
+            background: var(--accent-purple);
+            color: #fff;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-action-sm:hover {
+            background: var(--accent-glow);
+        }
+
+        .btn-outline-sm {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+
+        .btn-outline-sm:hover {
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+        }
+
+        /* PLAYABLE SATIRE SIMULATOR */
+        .game-box {
+            background: linear-gradient(180deg, #120b24 0%, #0a0614 100%);
+            border: 1px solid var(--accent-purple);
+            border-radius: 14px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .stat-val {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--neon-cyan);
+        }
+
+        .game-controls {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-game {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-glow));
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-game:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 450px;
+            width: 90%;
+            border: 1px solid var(--accent-purple);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 12px;
+            right: 18px;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- DOCUMENTATION HEADER -->
+    <header>
+        <div class="logo">QUESTLOGS <span>CASE STUDY</span></div>
+        <nav>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#inspiration">Inspiration</a></li>
+                <li><a href="#storyboard">UI Storyboard</a></li>
+                <li><a href="#shop-preview">Equipment Store</a></li>
+                <li><a href="#simulator">Satire Sim</a></li>
+            </ul>
+        </nav>
+        <button class="cart-badge-btn" onclick="openCartModal()">🛒 Cart (<span id="cart-count">0</span>)</button>
+    </header>
+
+    <!-- CASE STUDY HERO -->
+    <div class="case-hero">
+        <span class="badge">Single Page Documentation & Portfolio</span>
+        <h1>QuestLogs Platform Case Study</h1>
+        <p class="subtitle">An adaptive hybrid web application uniting pro esports hardware procurement with interactive social commentary on fast-food inflation dynamics.</p>
+
+        <div class="meta-grid">
+            <div class="meta-item">
+                <h4>Author & Producer</h4>
+                <p>Christine Julian</p>
+            </div>
+            <div class="meta-item">
+                <h4>Academic Context</h4>
+                <p>ATCM 2550: Internet Studio I</p>
+            </div>
+            <div class="meta-item">
+                <h4>Location & Base</h4>
+                <p>Austin, Texas</p>
+            </div>
+            <div class="meta-item">
+                <h4>Architecture</h4>
+                <p>Single Page Web Application</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- OVERVIEW -->
+        <div id="overview" class="section-block">
+            <h2 class="section-title">Project Overview</h2>
+            <p>QuestLogs is built to serve video game fans across all experience levels. Designed with a sleek dark-mode aesthetic, ambient RGB lighting accents, and high-contrast typography, the platform bridges hardware e-commerce with playable digital media.</p>
+            <p>Users can browse low-latency optical gaming gear, review news commentary, and play micro-games that critique modern corporate pricing structures.</p>
+        </div>
+
+        <!-- INSPIRATION & SOCIAL SATIRE STORY -->
+        <div id="inspiration" class="section-block">
+            <h2 class="section-title">Design Inspiration & Satirical Narrative</h2>
+            <p>The narrative core of QuestLogs draws direct inspiration from Molleindustria's classic anti-corporate indie project, <em>The McDonald's Video Game</em>. While conventional e-commerce websites focus exclusively on transactional sales, QuestLogs uses interactive media as a form of social critique.</p>
+            <p>The fast-food satire games on QuestLogs mock how chains like Burger King, Starbucks, and Dunkin' have transitioned from affordable, everyday conveniences into luxury-priced expenses. Through business simulation mechanics, users manage fast-food chains—jacking up prices, cutting portion sizes, and managing public outrage—to examine economic elasticity firsthand.</p>
+        </div>
+
+        <!-- UI & STORYBOARD SHOWCASE (REAL WORKING IMAGES) -->
+        <div id="storyboard" class="section-block">
+            <h2 class="section-title">UI & Storyboard Showcase</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Visual breakdown of key platform views featuring streaming setups, esports hardware catalogs, and corporate satire modules:</p>
+
+            <div class="storyboard-grid">
+
+                <!-- STORYBOARD CARD 1: HOMEPAGE HERO -->
+                <div class="story-card">
+                    <div class="browser-bar">
+                        <div class="dot dot-red"></div>
+                        <div class="dot dot-yellow"></div>
+                        <div class="dot dot-green"></div>
+                        <span class="browser-url">questlogs.com/home</span>
+                    </div>
+                    <!-- Uploaded Screenshot Fallback / Streaming Setup -->
+                    <img src="Screenshot 2026-08-11 173824.jpg" 
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80';" 
+                         alt="QuestLogs Hero Banner View" class="story-img">
+                    <div class="story-body">
+                        <h3>01. Video Game Centre Landing</h3>
+                        <p>High-contrast landing hero banner with ambient purple lighting accents, fast-food satire CTAs, and featured platform releases.</p>
+                    </div>
+                </div>
+
+                <!-- STORYBOARD CARD 2: HARDWARE STORE -->
+                <div class="story-card">
+                    <div class="browser-bar">
+                        <div class="dot dot-red"></div>
+                        <div class="dot dot-yellow"></div>
+                        <div class="dot dot-green"></div>
+                        <span class="browser-url">questlogs.com/shop</span>
+                    </div>
+                    <img src="Screenshot 2026-08-11 173803.jpg" 
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80';" 
+                         alt="Pro Gaming Hardware Store" class="story-img">
+                    <div class="story-body">
+                        <h3>02. Pro Hardware Equipment Shop</h3>
+                        <p>Filterable product grid showcasing optical mechanical keyboards, ultralight wireless mice, curved OLED displays, and noise-canceling headsets.</p>
+                    </div>
+                </div>
+
+                <!-- STORYBOARD CARD 3: ABOUT US NETWORK -->
+                <div class="story-card">
+                    <div class="browser-bar">
+                        <div class="dot dot-red"></div>
+                        <div class="dot dot-yellow"></div>
+                        <div class="dot dot-green"></div>
+                        <span class="browser-url">questlogs.com/about</span>
+                    </div>
+                    <img src="Screenshot 2026-08-11 173844.png" 
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1598550476439-6847785fcea6?auto=format&fit=crop&w=800&q=80';" 
+                         alt="About QuestLogs Network" class="story-img">
+                    <div class="story-body">
+                        <h3>03. About QuestLogs Network</h3>
+                        <p>Corporate profile section detailing the Austin, Texas location, hardware testing rigor, and satirical journalism mission.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- WORKING HARDWARE STORE INTERFACE -->
+        <div id="shop-preview" class="section-block">
+            <h2 class="section-title">Interactive Hardware Procurement Catalog</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">Click "Add to Cart" or "View Details" to test working e-commerce logic:</p>
+
+            <div class="shop-sim">
+                <div class="filter-bar">
+                    <button class="filter-btn active" onclick="filterCategory('all')">All Items</button>
+                    <button class="filter-btn" onclick="filterCategory('keyboard')">Keyboards</button>
+                    <button class="filter-btn" onclick="filterCategory('mouse')">Mice</button>
+                    <button class="filter-btn" onclick="filterCategory('audio')">Audio & Streaming</button>
+                </div>
+
+                <div class="shop-grid" id="product-container">
+                    <!-- JavaScript dynamically injects working product items -->
+                </div>
+            </div>
+        </div>
+
+        <!-- PLAYABLE SATIRE SIMULATOR -->
+        <div id="simulator" class="section-block">
+            <h2 class="section-title">Playable Fast-Food Inflation Simulator</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">Interactive simulation engine testing fast-food corporate price decisions and customer outrage limits:</p>
+
+            <div class="game-box">
+                <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 0.5rem;">McBurger Tycoon: Inflation Simulator</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">Balancing quarterly earnings against consumer price elasticity.</p>
+
+                <div class="game-stats">
+                    <div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Treasury Balance</div>
+                        <div id="sim-money" class="stat-val">$100.00</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Combo Price</div>
+                        <div id="sim-price" class="stat-val">$15.00</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Customer Outrage</div>
+                        <div id="sim-outrage" class="stat-val" style="color: var(--neon-pink);">10%</div>
+                    </div>
+                </div>
+
+                <div class="game-controls">
+                    <button class="btn-game" onclick="raisePrice()">Raise Price (+$5.00)</button>
+                    <button class="btn-game" onclick="shrinkPortion()">Apply Shrinkflation (-20%)</button>
+                    <button class="btn-game" onclick="runQuarter()">Execute Business Quarter</button>
+                </div>
+
+                <p id="game-log" style="margin-top: 1.5rem; color: var(--neon-cyan); font-weight: 700; min-height: 24px;"></p>
+            </div>
+        </div>
+
+        <!-- COMPANY DETAILS & CONTACT -->
+        <div class="section-block">
+            <h2 class="section-title">Company Headquarters & Credentials</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; color: var(--text-muted);">
+                <div>
+                    <h4 style="color: #fff; margin-bottom: 0.5rem;">Corporate Headquarters</h4>
+                    <p>QuestLogs Network Inc.</p>
+                    <p>123 Quest Way, Suite 100</p>
+                    <p>Austin, TX 78701</p>
+                </div>
+                <div>
+                    <h4 style="color: #fff; margin-bottom: 0.5rem;">Contact & Inquiries</h4>
+                    <p>Phone: (512) 555-0199</p>
+                    <p>Support: support@questlogs.com</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- GENERAL MODAL (CART & PRODUCT DETAIL) -->
+    <div id="generalModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Christine Julian — QuestLogs Portfolio Case Study & Platform Documentation</p>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        // PRODUCTS DATA
+        const products = [
+            {
+                id: 1,
+                category: 'keyboard',
+                name: 'Apex RGB Mechanical Keyboard',
+                price: 149.99,
+                img: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=600&q=80',
+                desc: 'Ultra-fast optical switches with per-key RGB lighting and aircraft-grade aluminum frame.'
+            },
+            {
+                id: 2,
+                category: 'mouse',
+                name: 'Viper Pro Ultra-Light Mouse',
+                price: 89.99,
+                img: 'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=600&q=80',
+                desc: '49g ultralight wireless design with 30K DPI optical sensor and 90-hour battery life.'
+            },
+            {
+                id: 3,
+                category: 'audio',
+                name: 'Acoustic Command Headset',
+                price: 179.99,
+                img: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=600&q=80',
+                desc: 'Lossless 2.4GHz wireless audio with 50mm drivers and active noise cancellation mic.'
+            },
+            {
+                id: 4,
+                category: 'audio',
+                name: 'Studio Pro Streaming Mic',
+                price: 129.99,
+                img: 'https://images.unsplash.com/photo-1598550476439-6847785fcea6?auto=format&fit=crop&w=600&q=80',
+                desc: 'Cardioid condenser microphone designed for broadcast studio gaming setups.'
+            }
+        ];
+
+        let cartCount = 0;
+
+        function renderProducts(items) {
+            const container = document.getElementById('product-container');
+            container.innerHTML = items.map(p => `
+                <div class="product-card">
+                    <img src="${p.img}" alt="${p.name}">
+                    <h4>${p.name}</h4>
+                    <div class="price">$${p.price.toFixed(2)}</div>
+                    <div class="btn-group">
+                        <button class="btn-action-sm btn-outline-sm" onclick="showProductDetails(${p.id})">Details</button>
+                        <button class="btn-action-sm" onclick="addToCart()">Add to Cart</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterCategory(cat) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (cat === 'all') {
+                renderProducts(products);
+            } else {
+                renderProducts(products.filter(p => p.category === cat));
+            }
+        }
+
+        function addToCart() {
+            cartCount++;
+            document.getElementById('cart-count').innerText = cartCount;
+        }
+
+        function showProductDetails(id) {
+            const product = products.find(p => p.id === id);
+            const modalBody = document.getElementById('modal-body');
+            modalBody.innerHTML = `
+                <h3 style="color: var(--neon-cyan); margin-bottom: 0.5rem;">${product.name}</h3>
+                <p style="color: var(--accent-glow); font-weight: bold; font-size: 1.2rem; margin-bottom: 1rem;">$${product.price.toFixed(2)}</p>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">${product.desc}</p>
+                <button class="btn-game" style="width: 100%;" onclick="addToCart(); closeModal();">Add to Purchase Queue</button>
+            `;
+            document.getElementById('generalModal').style.display = 'flex';
+        }
+
+        function openCartModal() {
+            const modalBody = document.getElementById('modal-body');
+            modalBody.innerHTML = `
+                <h3 style="color: #fff; margin-bottom: 1rem;">Procurement Order Summary</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Active items in cart: <strong>${cartCount}</strong></p>
+                <button class="btn-game" style="width: 100%;" onclick="closeModal()">Proceed to Checkout</button>
+            `;
+            document.getElementById('generalModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('generalModal').style.display = 'none';
+        }
+
+        // FAST-FOOD SATIRE GAME LOGIC
+        let gameState = {
+            money: 100.00,
+            price: 15.00,
+            outrage: 10
+        };
+
+        function updateDisplay() {
+            document.getElementById('sim-money').innerText = '$' + gameState.money.toFixed(2);
+            document.getElementById('sim-price').innerText = '$' + gameState.price.toFixed(2);
+            document.getElementById('sim-outrage').innerText = gameState.outrage + '%';
+        }
+
+        function raisePrice() {
+            gameState.price += 5.00;
+            gameState.outrage = Math.min(100, gameState.outrage + 15);
+            document.getElementById('game-log').innerText = "Price raised to $" + gameState.price.toFixed(2) + "! Customer outrage spiked.";
+            updateDisplay();
+        }
+
+        function shrinkPortion() {
+            gameState.money += 25.00;
+            gameState.outrage = Math.min(100, gameState.outrage + 10);
+            document.getElementById('game-log').innerText = "Shrinkflation active: reduced burger portion sizes by 20%. Margins boosted.";
+            updateDisplay();
+        }
+
+        function runQuarter() {
+            let buyers = Math.max(0, Math.floor(100 - gameState.outrage - gameState.price));
+            let earnings = buyers * gameState.price;
+            gameState.money += earnings;
+            document.getElementById('game-log').innerText = "Quarter completed: Sold " + buyers + " combos for $" + earnings.toFixed(2) + " total revenue.";
+            updateDisplay();
+        }
+
+        // INITIALIZATION
+        renderProducts(products);
+    </script>
+</body>
+</html>
