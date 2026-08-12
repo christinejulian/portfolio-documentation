@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuestLogs | Interactive Portfolio & Case Study</title>
+    <title>QuestLogs | Portfolio Case Study & Documentation</title>
     <style>
         :root {
             --bg-dark: #07070a;
@@ -25,10 +25,6 @@
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
             background-color: var(--bg-dark);
             color: var(--text-main);
@@ -36,7 +32,7 @@
             padding-bottom: 4rem;
         }
 
-        /* STICKY HEADER & DROPDOWN NAV */
+        /* HEADER & NAVIGATION */
         header {
             background: rgba(15, 16, 23, 0.95);
             backdrop-filter: blur(10px);
@@ -74,59 +70,18 @@
             display: flex;
             list-style: none;
             gap: 1.5rem;
-            align-items: center;
         }
 
-        nav a, .dropdown-btn {
+        nav a {
             color: var(--text-muted);
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
             transition: color 0.3s;
-            background: none;
-            border: none;
-            cursor: pointer;
         }
 
-        nav a:hover, .dropdown-btn:hover {
+        nav a:hover {
             color: var(--neon-cyan);
-        }
-
-        /* DROPDOWN MENU */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            top: 100%;
-            background-color: var(--bg-card-alt);
-            min-width: 200px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.6);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            z-index: 1001;
-            overflow: hidden;
-            margin-top: 0.5rem;
-        }
-
-        .dropdown-content a {
-            color: var(--text-main);
-            padding: 12px 16px;
-            display: block;
-            font-weight: 500;
-        }
-
-        .dropdown-content a:hover {
-            background-color: var(--accent-purple);
-            color: #fff;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
         }
 
         /* HERO SECTION */
@@ -167,6 +122,7 @@
             margin: 0 auto 2rem auto;
         }
 
+        /* METRICS GRID */
         .meta-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -192,7 +148,7 @@
             font-weight: 600;
         }
 
-        /* MAIN LAYOUT */
+        /* LAYOUT CONTAINERS */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -214,9 +170,12 @@
             border-left: 4px solid var(--accent-purple);
             padding-left: 1rem;
             margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        /* STORYBOARD SHOWCASE GRID */
+        /* STORYBOARD & UI DISPLAY */
         .preview-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -251,24 +210,11 @@
         .dot-yellow { background: #ffbd2e; }
         .dot-green { background: #27c93f; }
 
-        /* UNIFORM PORTFOLIO IMAGE STYLING */
-        .img-container {
+        .preview-card img {
             width: 100%;
-            height: 220px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .img-container img {
-            width: 100%;
-            height: 100%;
+            height: 240px;
             object-fit: cover;
             display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .preview-card:hover .img-container img {
-            transform: scale(1.05);
         }
 
         .preview-body {
@@ -287,7 +233,7 @@
             margin-bottom: 1rem;
         }
 
-        /* HARDWARE / STREAMING UI DISPLAY */
+        /* GALLERY & HARDWARE DISPLAY */
         .shop-sim {
             background: #0a0b10;
             border-radius: 10px;
@@ -312,8 +258,10 @@
             justify-content: space-between;
         }
 
-        .product-card .img-container {
-            height: 160px;
+        .product-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
             border-radius: 6px;
             margin-bottom: 0.8rem;
         }
@@ -324,10 +272,10 @@
             margin-bottom: 0.3rem;
         }
 
-        .product-card .spec-tag {
+        .product-card .price {
             color: var(--accent-glow);
-            font-weight: 600;
-            font-size: 0.85rem;
+            font-weight: 700;
+            font-size: 1.1rem;
             margin-bottom: 0.8rem;
         }
 
@@ -349,7 +297,7 @@
             transform: translateY(-1px);
         }
 
-        /* SATIRE GAME PLAYABLE SIMULATOR */
+        /* INTERACTIVE SIMULATOR */
         .game-box {
             background: linear-gradient(180deg, #120b24 0%, #0a0614 100%);
             border: 1px solid var(--accent-purple);
@@ -397,7 +345,7 @@
             box-shadow: 0 0 15px var(--accent-glow);
         }
 
-        /* MODAL DIALOG */
+        /* MODAL DIALOGS */
         .modal {
             display: none;
             position: fixed;
@@ -444,30 +392,25 @@
 </head>
 <body>
 
-    <!-- STICKY HEADER WITH DROPDOWN MENU -->
+    <!-- DOCUMENTATION HEADER -->
     <header>
-        <div class="logo">QUESTLOGS <span>PORTFOLIO</span></div>
+        <div class="logo">QUESTLOGS <span>PORTFOLIO CASE STUDY</span></div>
         <nav>
             <ul>
                 <li><a href="#overview">Overview</a></li>
-                <li class="dropdown">
-                    <button class="dropdown-btn">Sections &#9662;</button>
-                    <div class="dropdown-content">
-                        <a href="#storyboard" onclick="closeDropdown()">UI Storyboard</a>
-                        <a href="#hardware" onclick="closeDropdown()">Streaming Hardware</a>
-                        <a href="#simulator" onclick="closeDropdown()">Interactive Satire</a>
-                        <a href="#inspiration" onclick="closeDropdown()">Concept & Mission</a>
-                    </div>
-                </li>
+                <li><a href="#inspiration">Inspiration</a></li>
+                <li><a href="#storyboard">UI Storyboard</a></li>
+                <li><a href="#gallery">Media & Showcase</a></li>
+                <li><a href="#simulator">Interactive Satire</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- HERO SECTION -->
     <div class="case-hero">
-        <span class="badge">Single-Page UI Case Study</span>
-        <h1>QuestLogs Gaming & Media Hub</h1>
-        <p class="subtitle">A full-stack, responsive portfolio showcase bridging pro streaming hardware curation with original interactive digital satire.</p>
+        <span class="badge">Web Design & Interactive Satire Case Study</span>
+        <h1>QuestLogs Platform Documentation</h1>
+        <p class="subtitle">A responsive single-page case study documenting the design narrative, UI storyboarding, and socio-economic interactive mechanics of QuestLogs.</p>
 
         <div class="meta-grid">
             <div class="meta-item">
@@ -479,12 +422,12 @@
                 <p>Austin, Texas</p>
             </div>
             <div class="meta-item">
-                <h4>Focus Areas</h4>
-                <p>Streaming Gear & Corporate Satire</p>
+                <h4>Core Focus</h4>
+                <p>Interactive Gaming & Fast-Food Satire</p>
             </div>
             <div class="meta-item">
                 <h4>Architecture</h4>
-                <p>Single-Page Interactive App</p>
+                <p>Single-Page Interactive Documentation</p>
             </div>
         </div>
     </div>
@@ -494,129 +437,122 @@
         <!-- OVERVIEW -->
         <div id="overview" class="section-block">
             <h2 class="section-title">Project Overview</h2>
-            <p>QuestLogs is an adaptive web interface built for gaming and streaming enthusiasts. Designed with a dark-mode theme and glowing RGB highlights, the single-page application features interactive storyboards, functional streaming gear inspect panels, and playable newsgame simulations without cart dependencies.</p>
+            <p>QuestLogs is an adaptive web application engineered to cater to video game fans across all experience levels. Designed with a sleek dark-mode theme, glowing RGB lighting effects, and crisp typography, the platform mirrors the ambient aesthetics of modern gaming rigs while providing an intuitive, interactive environment.</p>
         </div>
 
-        <!-- STORYBOARD SHOWCASE WITH GAMING & STREAMING IMAGES -->
+        <!-- CONCEPT & INSPIRATION -->
+        <div id="inspiration" class="section-block">
+            <h2 class="section-title">Concept & Inspiration</h2>
+            <p>The core concept behind QuestLogs draws inspiration from classical newsgames and anti-corporate satires, most notably <em>The McDonald's Video Game</em>. While conventional web projects focus purely on commercial transactions, QuestLogs presents digital media curation as a platform for social commentary.</p>
+            <p>Through interactive simulations and curated gameplay categories, QuestLogs directly critiques contemporary consumerism—specifically ridiculing how fast-food has shifted from a cheap, everyday convenience into an overpriced luxury over the past decade.</p>
+        </div>
+
+        <!-- UI & FEATURE STORYBOARD (STORYTELLING WITH WORKING BUTTONS AND IMAGES) -->
         <div id="storyboard" class="section-block">
-            <h2 class="section-title">UI & Storyboard Showcase</h2>
-            <p style="color: var(--text-muted); margin-bottom: 1rem;">Click any action button below to view detailed interface documentation:</p>
+            <h2 class="section-title">UI Storyboard & Context Screenshots</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">Walkthrough of the platform's core interface design and visual narrative flow for prospective clients and employers:</p>
 
             <div class="preview-grid">
-                <!-- PANEL 1 -->
+                <!-- STORYBOARD ITEM 1 -->
                 <div class="preview-card">
                     <div class="preview-header">
                         <div class="dot dot-red"></div>
                         <div class="dot dot-yellow"></div>
                         <div class="dot dot-green"></div>
-                        <span style="font-size: 0.75rem; color: var(--text-muted); margin-left: auto;">Landing UI</span>
+                        <span style="font-size: 0.75rem; color: var(--text-muted); margin-left: auto;">Homepage UI</span>
                     </div>
-                    <div class="img-container">
-                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80" alt="Esports Gaming Room Banner">
-                    </div>
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80" alt="Esports Gaming Room Landing Banner">
                     <div class="preview-body">
-                        <h3>01. Esports Battle Station</h3>
-                        <p>High-impact hero visual designed for custom RGB setup layouts and low-latency display integration.</p>
-                        <button class="btn-sm" onclick="showModal('Esports Station UI', 'This section features dynamic background lighting overlays, quick navigation anchors, and responsive breakpoints optimized for ultra-wide displays.')">Inspect Interface</button>
+                        <h3>01. Command Center Landing</h3>
+                        <p>High-impact hero section showcasing dynamic game previews and central navigation crafted in ambient neon purple.</p>
+                        <button class="btn-sm" onclick="showModal('Command Center Landing', 'The homepage landing UI establishes immediate visual immersion using dark-mode surfaces, crisp contrast, and instant category selection links.')">Inspect Interface Details</button>
                     </div>
                 </div>
 
-                <!-- PANEL 2 -->
+                <!-- STORYBOARD ITEM 2 -->
                 <div class="preview-card">
                     <div class="preview-header">
                         <div class="dot dot-red"></div>
                         <div class="dot dot-yellow"></div>
                         <div class="dot dot-green"></div>
-                        <span style="font-size: 0.75rem; color: var(--text-muted); margin-left: auto;">Streaming UI</span>
+                        <span style="font-size: 0.75rem; color: var(--text-muted); margin-left: auto;">Strategy UI</span>
                     </div>
-                    <div class="img-container">
-                        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80" alt="Broadcast & Streaming Rig">
-                    </div>
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80" alt="Real Time Strategy Interface Showcase">
                     <div class="preview-body">
-                        <h3>02. Live Broadcast Studio</h3>
-                        <p>Streamer deck layout emphasizing multi-monitor setup integration and live audience feed telemetry.</p>
-                        <button class="btn-sm" onclick="showModal('Streaming Studio UI', 'Integrates OBS scene-switching metrics, high-bitrate capture card settings, and real-time social engagement overlays.')">Inspect Interface</button>
+                        <h3>02. Real-Time Strategy Hub</h3>
+                        <p>Dedicated showcase for tactical and strategy titles, encouraging competitive play vs NPCs and players alike.</p>
+                        <button class="btn-sm" onclick="showModal('Real-Time Strategy Hub', 'Designed to display intense battle environments, tactical stats, and match previews using lightweight interactive cards.')">Inspect Interface Details</button>
                     </div>
                 </div>
 
-                <!-- PANEL 3 -->
+                <!-- STORYBOARD ITEM 3 -->
                 <div class="preview-card">
                     <div class="preview-header">
                         <div class="dot dot-red"></div>
                         <div class="dot dot-yellow"></div>
                         <div class="dot dot-green"></div>
-                        <span style="font-size: 0.75rem; color: var(--text-muted); margin-left: auto;">Content Hub</span>
+                        <span style="font-size: 0.75rem; color: var(--text-muted); margin-left: auto;">RPG & Casual UI</span>
                     </div>
-                    <div class="img-container">
-                        <img src="https://images.unsplash.com/photo-1560253023-3ec5d502959f?auto=format&fit=crop&w=800&q=80" alt="Gaming Setup Studio">
-                    </div>
+                    <img src="https://images.unsplash.com/photo-1560253023-3ec5d502959f?auto=format&fit=crop&w=800&q=80" alt="Streaming and RPG Gaming Room Setup">
                     <div class="preview-body">
-                        <h3>03. Media Curation Hub</h3>
-                        <p>Provides genre-based game indexing and playable newsgames analyzing fast-food price trends.</p>
-                        <button class="btn-sm" onclick="showModal('Media Curation Hub', 'Houses editorial analysis, satirical newsgames, and user rating feeds under unified single-page navigation.')">Inspect Interface</button>
+                        <h3>03. RPG & Casual Games Portal</h3>
+                        <p>Curated zones for immersive role-playing adventures alongside quirky casual games designed to explore socio-economic themes.</p>
+                        <button class="btn-sm" onclick="showModal('RPG & Casual Portal', 'Features vibrant color-coded layout cards that highlight narrative-heavy worlds and quirky satirical titles.')">Inspect Interface Details</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- HARDWARE & GEAR CATALOGUE -->
-        <div id="hardware" class="section-block">
-            <h2 class="section-title">Pro Gaming & Streaming Gear Showcase</h2>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Interactive spec preview cards without purchase/cart mechanisms:</p>
-            
+        <!-- MEDIA & GAMING SHOWCASE (NO CART FUNCTION - VIEW ONLY) -->
+        <div id="gallery" class="section-block">
+            <h2 class="section-title">Gaming & Streaming Media Showcase</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">Direct visual presentation of high-resolution gaming and streaming environments integrated across the platform:</p>
+
             <div class="shop-sim">
                 <div class="shop-grid">
                     <div class="product-card">
-                        <div class="img-container">
-                            <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=500&q=80" alt="RGB Mechanical Keyboard">
-                        </div>
-                        <h4>Apex Optical Keyboard</h4>
-                        <div class="spec-tag">0.2ms Actuation | RGB</div>
-                        <button class="btn-sm" onclick="showModal('Apex Optical Keyboard', 'Features per-key RGB customization, aircraft-grade aluminum top frame, and hot-swappable optical switches.')">View Technical Specs</button>
+                        <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=600&q=80" alt="Pro Mechanical RGB Keyboard">
+                        <h4>Apex Mechanical Keyboard</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.8rem;">Ultra-fast optical switches with custom ambient lighting.</p>
+                        <button class="btn-sm" onclick="showModal('Apex Mechanical Keyboard', 'Ultra-fast optical switches with per-key RGB lighting and aircraft-grade aluminum top plate.')">View Specs & Details</button>
                     </div>
 
                     <div class="product-card">
-                        <div class="img-container">
-                            <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=500&q=80" alt="Gaming Mouse">
-                        </div>
-                        <h4>Viper Wireless Mouse</h4>
-                        <div class="spec-tag">49g Lightweight | 30K DPI</div>
-                        <button class="btn-sm" onclick="showModal('Viper Wireless Mouse', 'Ultra-lightweight ergonomic mouse equipped with optical sensors and a 90-hour continuous battery life.')">View Technical Specs</button>
+                        <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=600&q=80" alt="Ultra-Light Wireless Gaming Mouse">
+                        <h4>Viper Pro Wireless Mouse</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.8rem;">Precision optical sensor designed for high-tier esports competition.</p>
+                        <button class="btn-sm" onclick="showModal('Viper Pro Wireless Mouse', '49g ultra-lightweight design with 30K DPI optical sensor and 90 hours battery life.')">View Specs & Details</button>
                     </div>
 
                     <div class="product-card">
-                        <div class="img-container">
-                            <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=500&q=80" alt="Gaming Monitor">
-                        </div>
-                        <h4>Titan 34" Curved OLED</h4>
-                        <div class="spec-tag">240Hz Refresh | 0.03ms GTG</div>
-                        <button class="btn-sm" onclick="showModal('Titan 34 Curved OLED', 'Ultrawide 1800R curved gaming monitor engineered with Quantum Dot technology and HDR1000 support.')">View Technical Specs</button>
+                        <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=600&q=80" alt="Curved Gaming OLED Display">
+                        <h4>Titan 34" Curved OLED Monitor</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.8rem;">240Hz ultra-wide display providing maximum immersion.</p>
+                        <button class="btn-sm" onclick="showModal('Titan 34 OLED', '240Hz refresh rate, 0.03ms response time, Quantum Dot OLED display with 1800R curve.')">View Specs & Details</button>
                     </div>
 
                     <div class="product-card">
-                        <div class="img-container">
-                            <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=500&q=80" alt="Wireless Headset">
-                        </div>
-                        <h4>Acoustic Command Headset</h4>
-                        <div class="spec-tag">Broadcast-Grade Mic | ANC</div>
-                        <button class="btn-sm" onclick="showModal('Acoustic Command Headset', 'Lossless 2.4GHz wireless audio with active noise cancellation and a detachable cardioid microphone.')">View Technical Specs</button>
+                        <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=600&q=80" alt="Pro Wireless Broadcast Headset">
+                        <h4>Acoustic Command Wireless Headset</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.8rem;">Lossless studio audio quality with active noise cancellation.</p>
+                        <button class="btn-sm" onclick="showModal('Acoustic Command Headset', 'Lossless 2.4GHz wireless connection, 50mm drivers, active noise cancellation.')">View Specs & Details</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- INTERACTIVE FAST-FOOD SATIRE GAME -->
+        <!-- PLAYABLE FAST-FOOD SATIRE SIMULATOR -->
         <div id="simulator" class="section-block">
-            <h2 class="section-title">Interactive Satire Simulator</h2>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Test the underlying inflation economics game engine directly in the UI:</p>
+            <h2 class="section-title">Playable Fast-Food Satire Simulator</h2>
+            <p style="margin-bottom: 1rem;">Experience the underlying game mechanics directly inside this documentation page. Adjust pricing and shrinkflation levers to balance profit against rising consumer outrage:</p>
 
             <div class="game-box">
-                <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 0.5rem;">Fast-Food Corporate Inflation Engine</h3>
-                <p style="color: var(--text-muted); font-size: 0.95rem;">Balance quarterly corporate profit margins against consumer outrage shifts.</p>
+                <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 0.5rem;">Fast-Food Inflation & Greed Simulator</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">Interactive simulation modeling fast-food price hikes and consumer pushback.</p>
 
                 <div class="game-stats">
                     <div>
-                        <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Treasury</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Corporate Treasury</div>
                         <div id="sim-money" class="stat-val">$100.00</div>
                     </div>
                     <div>
@@ -632,22 +568,32 @@
                 <div class="game-controls">
                     <button class="btn-action" onclick="raisePrice()">Raise Price (+$5.00)</button>
                     <button class="btn-action" onclick="shrinkPortion()">Apply Shrinkflation (-20%)</button>
-                    <button class="btn-action" onclick="runQuarter()">Execute Quarter</button>
+                    <button class="btn-action" onclick="runQuarter()">Execute Sales Quarter</button>
                 </div>
 
                 <p id="game-log" style="margin-top: 1.5rem; color: var(--neon-cyan); font-weight: 700; min-height: 24px;"></p>
             </div>
         </div>
 
-        <!-- INSPIRATION & MISSION -->
-        <div id="inspiration" class="section-block">
-            <h2 class="section-title">Concept & Mission</h2>
-            <p>QuestLogs takes inspiration from classic anti-corporate newsgames like <em>The McDonald's Video Game</em>. Rather than operating strictly as a storefront, QuestLogs utilizes interactive media to present social commentary on fast-food inflation and modern consumer economics.</p>
+        <!-- PROJECT INFO & CONTACT -->
+        <div class="section-block">
+            <h2 class="section-title">Project Metadata & Contact</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div>
+                    <h4 style="color: var(--accent-glow);">QuestLogs Network HQ</h4>
+                    <p style="margin-top: 0.5rem;">123 Quest Way, Suite 100<br>Austin, TX 78701</p>
+                    <p>Phone: (512) 555-0199</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--accent-glow);">Documented Features</h4>
+                    <p style="margin-top: 0.5rem;">• Real-Time Strategy Showcase<br>• Fast-Food Satire Simulation<br>• RPG & Casual Game Portals<br>• Ambient Dark Mode & RGB Design</p>
+                </div>
+            </div>
         </div>
 
     </div>
 
-    <!-- GENERAL PURPOSE INTERACTIVE MODAL -->
+    <!-- GENERAL MODAL -->
     <div id="generalModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
@@ -656,12 +602,11 @@
     </div>
 
     <footer>
-        <p>&copy; QuestLogs Network. Interactive Single-Page Portfolio & Case Study.</p>
+        <p>&copy; 2026 QuestLogs Network. Single-Page Portfolio Case Study & Project Documentation.</p>
     </footer>
 
-    <!-- INTERACTIVE JAVASCRIPT -->
+    <!-- INTERACTIVE LOGIC -->
     <script>
-        // SATIRE SIMULATOR STATE
         let gameState = {
             money: 100.00,
             price: 15.00,
@@ -677,14 +622,14 @@
         function raisePrice() {
             gameState.price += 5.00;
             gameState.outrage = Math.min(100, gameState.outrage + 15);
-            document.getElementById('game-log').innerText = "Price raised to $" + gameState.price.toFixed(2) + ". Customer outrage increased!";
+            document.getElementById('game-log').innerText = "Combo price raised to $" + gameState.price.toFixed(2) + ". Customer outrage increased!";
             updateDisplay();
         }
 
         function shrinkPortion() {
             gameState.money += 25.00;
             gameState.outrage = Math.min(100, gameState.outrage + 10);
-            document.getElementById('game-log').innerText = "Shrinkflation applied! Portion reduced by 20%. Profit margin expanded.";
+            document.getElementById('game-log').innerText = "Shrinkflation applied! Meat size reduced by 20%. Corporate margins expanded.";
             updateDisplay();
         }
 
@@ -692,39 +637,22 @@
             let buyers = Math.max(0, Math.floor(100 - gameState.outrage - gameState.price));
             let earnings = buyers * gameState.price;
             gameState.money += earnings;
-            document.getElementById('game-log').innerText = "Quarter complete: Generated $" + earnings.toFixed(2) + " from " + buyers + " customers.";
+            document.getElementById('game-log').innerText = "Quarter complete: Sold " + buyers + " combos for $" + earnings.toFixed(2) + " in revenue.";
             updateDisplay();
         }
 
-        // MODAL HANDLERS
         function showModal(title, text) {
             const body = document.getElementById('modal-body');
             body.innerHTML = `
-                <h3 style="color: var(--neon-cyan); margin-bottom: 0.8rem; font-size: 1.3rem;">${title}</h3>
+                <h3 style="color: var(--neon-cyan); margin-bottom: 0.8rem;">${title}</h3>
                 <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem;">${text}</p>
-                <button class="btn-sm" onclick="closeModal()">Close Inspector</button>
+                <button class="btn-sm" onclick="closeModal()">Close Overlay</button>
             `;
             document.getElementById('generalModal').style.display = 'flex';
         }
 
         function closeModal() {
             document.getElementById('generalModal').style.display = 'none';
-        }
-
-        function closeDropdown() {
-            const dropdown = document.querySelector('.dropdown-content');
-            if (dropdown) {
-                dropdown.style.display = 'none';
-                setTimeout(() => dropdown.style.display = '', 500);
-            }
-        }
-
-        // Close modal when clicking outside content
-        window.onclick = function(event) {
-            const modal = document.getElementById('generalModal');
-            if (event.target === modal) {
-                closeModal();
-            }
         }
     </script>
 </body>
